@@ -1,0 +1,12 @@
+
+.bg{
+    background-image: url("/assets/images/flight16.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}

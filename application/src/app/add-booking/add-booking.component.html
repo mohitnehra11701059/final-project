@@ -1,0 +1,43 @@
+<div style="height: 600px;">
+<div class="alert alert-success col-md-3 mx-auto" *ngIf="msg!=undefined">{{msg}}</div>
+<div class="alert alert-danger  col-md-3 mx-auto p-2 m-2" *ngIf="errorMsg!=undefined">{{errorMsg}}</div>
+<section class="col-md-3  p-2" *ngIf="showFlag" style="left: 150px;">
+  <h2 class="text-center bg-alert">Enter the details</h2>
+
+  <form #frm="ngForm" (ngSubmit)="bookFlight()">
+    <div>ContactNumber</div>
+    <div><input type="text" name="txtcontact" [(ngModel)]="bookForm.contactNo" required pattern="[0-9]{10}" class="form-control" #contact="ngModel"
+        required /></div>
+        <div class="alert alert-danger" *ngIf="contact.invalid && contact.touched">Contact Number is
+      required.</div>
+
+    <div>Tickets</div>
+    <div><input type="number" name="txttickets" [(ngModel)]="bookForm.tkts" (keyup)="displayrows()" class="form-control"
+        #tickets="ngModel" required pattern="[1-5]" min="1" max="5" /></div>
+        <div class="alert alert-danger" *ngIf="tickets.invalid && tickets.touched"> Min 1 and Min 5</div>
+
+    <table class="table table-striped table-light  m-2 col-md-4">
+     
+      <tr *ngFor="let p of bookForm.passengers; let idx=index">
+        <th><b>Name</b></th>
+        <td><div><input type="text" name="passengerName{{idx}}" [(ngModel)]="p.passengerName" #pname="ngModel" required/>
+        <div class="alert alert-danger" *ngIf="pname.invalid && pname.touched">Name Required</div></div>
+</td>
+        <th><b>Age</b></th>
+        <td><div><input type="number" name="age{{idx}}" [(ngModel)]="p.age" #age="ngModel" required pattern="[1-9][0-9]"/>
+        <div class="alert alert-danger" *ngIf="age.invalid && (age.touched || age.dirty)">Age Required</div></div>
+        </td>
+
+        <th><b>Gender</b></th>
+         <td><input type="radio" id="male" value="male" name="gender{{idx}}" [(ngModel)]="p.gender" required/>M</td>
+          <td><input type="radio" id="female" value="female" name="gender{{idx}}"
+                [(ngModel)]="p.gender" required/>F
+        </td>
+      </tr>
+    </table>
+    <div class="mt-2 text-center"><input type="submit" value="Book" [disabled]="!frm.valid" class="btn btn-danger"/></div>
+  
+  </form>
+
+
+</section></div>
